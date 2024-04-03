@@ -1,0 +1,22 @@
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+@font-face {
+    font-family: 'Hero';
+    src: url('./fonts/Hero-Regular.ttf');
+}
+
+.todo-app {
+    width: 35rem;
+    margin: auto;
+}
+
+h1 {
+    font-family: Hero;
+    font-size: 48px;
+    text-align: center;
+    margin: 20px 0px;
+}

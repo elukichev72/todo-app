@@ -1,0 +1,38 @@
+.add-todo {
+    display: flex;
+    align-items: center;
+}
+
+.input[type='text'] {
+    font-family: Hero;
+    font-size: 16px;
+    text-align: center;
+}
+
+.input {
+    margin: 8px;
+    padding: 8px;
+    border: 2px solid black;
+    border-radius: 20px;
+    flex-grow: 1;
+}
+
+.filter {
+    display: flex;
+}
+
+.todo__button_width {
+    width: 100%;
+}
+
+.todo__button_active {
+    margin: 8px;
+    padding: 8px;
+    width: 100%;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-color: black;
+    color: white;
+    font-family: Hero;
+    font-size: 16px;
+}

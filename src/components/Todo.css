@@ -1,0 +1,65 @@
+.todo-component {
+    display: flex;
+    flex-direction: column;
+}
+
+.todo-field {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox {
+    min-width: 20px;
+    height: 20px;
+    margin: 20px;
+}
+
+.checkbox:hover {
+    cursor: pointer;
+}
+
+.checkbox:checked {
+    accent-color: black;
+}
+
+p {
+    font-family: Hero;
+    font-size: 32px;
+}
+
+.btns {
+    display: flex;
+}
+
+.todo__button {
+    margin: 8px;
+    padding: 8px;
+    width: 80px;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-color: white;
+    font-family: Hero;
+    font-size: 16px;
+}
+
+.todo__button:hover {
+    cursor: pointer;
+    background-color: black;
+    color: white;
+}
+
+.todo__button_active {
+    margin: 8px;
+    padding: 8px;
+    width: 80px;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-color: black;
+    color: white;
+    font-family: Hero;
+    font-size: 16px;
+}
+
+.todo__button_active:hover {
+    cursor: pointer;
+}
