@@ -1,11 +1,15 @@
-import './app.css'
-import TodoList from './components/TodoList'
+import GlobalStyles from './assets/styles/global.styles';
+import { SApp, STitle } from './assets/styles/app.styles';
+import TodoList from './components/TodoList/TodoList';
 
 export default function App() {
     return (
-    <div className='todo-app'>
-        <h1>Todo List</h1>
-        <TodoList />
-    </div>
+        <>
+            <GlobalStyles />
+            <SApp>
+                <STitle>Todo List</STitle>
+                <TodoList />
+            </SApp>
+        </>
     );
 }

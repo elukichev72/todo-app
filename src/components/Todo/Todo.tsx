@@ -1,69 +1,70 @@
-import { useState } from 'react';
+import { FC, memo, useState } from 'react';
 import './Todo.css';
-import {TTodo} from './TodoList';
+import { TodoModel } from '../TodoList/TodoList';
 
 type TProps = {
     title: string;
-    todo: TTodo;
+    todo: TodoModel;
     id: string;
-    deleteTodo: (arg: string) => void;
-    userInput: string;
-    setUserInput: (arg: string) => void;
-    todos: TTodo[];
-    setTodos: (arg: TTodo[]) => void;
+    todos: TodoModel[];
+    setTodos: (arg: TodoModel[]) => void;
 };
 
-export default function Todo(props: TProps) {
-    const [status, setStatus] = useState<0 | 1>(0);
-    const [editedInput, setEditedInput] = useState<string>('');
+const Todo: FC<TProps> = ({ title, todo, id, todos, setTodos }) => {
+    const [isEditing, setIsEditing] = useState(false);
+    const [editedInput, setEditedInput] = useState('');
 
     const editTodo = (): void => {
-        setStatus(1);
-        setEditedInput(props.title);
+        setIsEditing(true);
+        setEditedInput(title);
+    };
+
+    const deleteTodo = (id: string) => {
+        setTodos(todos.filter((todo: TodoModel) => todo.id !== id));
     };
 
     const cancelEditing = (): void => {
-        setStatus(0);
+        setIsEditing(false);
     };
 
-    const saveEditing = (id: string, text: string): void => {
-        let editedTodo = props.todos.map((todo: TTodo): TTodo => {
+    const saveEditing = (id: string, text: string) => {
+        let editedTodo = todos.map((todo: TodoModel): TodoModel => {
             if (todo.id === id) {
                 todo.title = text;
             }
             return todo;
         });
-        props.setTodos(editedTodo);
-        setStatus(0);
+        setTodos(editedTodo);
+        setIsEditing(false);
     };
 
     const completedTodo = (id: string) => {
-        let ct = props.todos.map((todo: TTodo): TTodo => {
+        let ct = todos.map((todo: TodoModel): TodoModel => {
             if (todo.id === id) {
                 todo.completed = !todo.completed;
             }
             return todo;
         });
-        props.setTodos(ct);
+        setTodos(ct);
     };
     return (
-        <div>
-            {status === 0 ? (
+        <>
+            {!isEditing ? (
                 <div className='todo-component'>
                     <div className='todo-field'>
                         <input
                             type='checkbox'
-                            checked={props.todo.completed}
-                            onChange={() => completedTodo(props.id)}
+                            checked={todo.completed}
+                            onChange={() => completedTodo(id)}
                             className='checkbox'
                         ></input>
-                        <p>{props.title}</p>
+                        <p>{title}</p>
                     </div>
                     <div className='btns'>
                         <button className='todo__button' onClick={editTodo}>
                             Edit
                         </button>
-                        <button className='todo__button' onClick={() => props.deleteTodo(props.id)}>
+                        <button className='todo__button' onClick={() => deleteTodo(id)}>
                             Delete
                         </button>
                     </div>
@@ -71,7 +72,7 @@ export default function Todo(props: TProps) {
             ) : (
                 ''
             )}
-            {status === 1 ? (
+            {isEditing ? (
                 <div className='todo-component'>
                     <div>
                         <input
@@ -87,7 +88,7 @@ export default function Todo(props: TProps) {
                         <button className='todo__button' onClick={cancelEditing}>
                             Cancel
                         </button>
-                        <button className='todo__button' onClick={() => saveEditing(props.id, editedInput)}>
+                        <button className='todo__button' onClick={() => saveEditing(id, editedInput)}>
                             Save
                         </button>
                     </div>
@@ -95,6 +96,8 @@ export default function Todo(props: TProps) {
             ) : (
                 ''
             )}
-        </div>
+        </>
     );
-}
+};
+
+export default memo(Todo);

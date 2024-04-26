@@ -25,6 +25,7 @@
 p {
     font-family: Hero;
     font-size: 32px;
+    word-break: break-all;
 }
 
 .btns {
